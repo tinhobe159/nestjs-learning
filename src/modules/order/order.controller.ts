@@ -6,6 +6,7 @@ import { ExcludedNullInterceptor } from "src/interceptors/excluded-null.intercep
 import { TimeOutInterceptor } from "src/interceptors/timeout.interceptors";
 import { ParseControllerValidationPipe } from "src/pipe/parse-custom-controller-validation.pipe";
 import { ParseRouteValidationPipe } from "src/pipe/parse-custom-route-validation.pipe";
+import { OrderService } from "./order.service";
 
 @UseGuards(JwtAuthorizationGuard)
 @Throttle({ default: { limit: 3, ttl: 60000 } })
@@ -14,8 +15,11 @@ import { ParseRouteValidationPipe } from "src/pipe/parse-custom-route-validation
 @UsePipes(ParseControllerValidationPipe)
 export class OrderController {
     private logger: Logger;
-    constructor() {
+    constructor(
+        private orderService: OrderService
+    ) {
         this.logger = new Logger(OrderController.name);
+
     }
     @Get('find_all')
     findAll(): string {

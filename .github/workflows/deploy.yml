@@ -1,6 +1,9 @@
 name: Unit Tests
 
-on: [pull_request]
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   tests:
@@ -10,13 +13,19 @@ jobs:
       matrix:
         node-version: [18.x]
 
-      steps:
-        - uses: actions/checkout@v2
-        - name: Use Node.js ${{ matrix.node-version }}
-          uses: actions/setup-node@v1
-          with:
-            node-version: ${{ matrix.node-version }}
-        - name: npm install
-          run: npm ci
-        - name: tests
-          run: npm test
+    env:
+      MODE: 'development'
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: npm install
+        run: npm ci
+
+      - name: tests
+        run: npm test

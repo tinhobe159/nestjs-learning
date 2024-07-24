@@ -8,13 +8,11 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    environment: development
 
     strategy:
       matrix:
         node-version: [18.x]
-
-    env:
-      MODE: 'development'
 
     steps:
       - uses: actions/checkout@v2

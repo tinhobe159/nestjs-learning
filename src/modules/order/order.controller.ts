@@ -1,5 +1,4 @@
 import { Body, Controller, Get, Logger, UseGuards, UseInterceptors, UsePipes, } from "@nestjs/common";
-import { Throttle } from "@nestjs/throttler";
 import { JwtAuthorizationGuard } from "src/guards/jwt-auth.guard";
 import { OwnerShipGuard } from "src/guards/owner-ship.guard";
 import { ExcludedNullInterceptor } from "src/interceptors/excluded-null.interceptors";
@@ -9,7 +8,6 @@ import { ParseRouteValidationPipe } from "src/pipe/parse-custom-route-validation
 import { OrderService } from "./order.service";
 
 @UseGuards(JwtAuthorizationGuard)
-@Throttle({ default: { limit: 3, ttl: 60000 } })
 @Controller('order')
 @UseInterceptors(TimeOutInterceptor)
 @UsePipes(ParseControllerValidationPipe)

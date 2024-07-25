@@ -11,7 +11,7 @@ import { CustomThrottlerGuard } from './guards/throttler.guard';
   imports: [
     // Just add method forRoot props for fun. Use decorator for each module. Don't know why?
     ThrottlerModule.forRoot([{
-      ttl: 60,
+      ttl: 6000,
       limit: 3,
     }]),
     OrderModule,],
